@@ -1,0 +1,57 @@
+{% extends 'base/base_regR.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head_link %}
+    <link rel="stylesheet" href="{% static 'list/util.css' %}">
+	<link rel="stylesheet" href="{% static 'list/main.css' %}">
+	<link rel="stylesheet" href="{% static 'list/font-awesome.min.css' %}">
+{% endblock %}
+
+{% block page_content %}
+    <center><h2>New-Patient Page</h2></center>
+
+    <div class="py-5">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div>
+                    <h4>Search Area</h4>
+                    <input class="info" type="text">
+                    <button class="btn btn-primary btn-get-data">Search Patient</button>
+
+                    <div class="content-data mt-4" data-url="{% url 'regis:regisSearch' %}">
+                        Data will come hesre
+                        {{ object }}
+                        <ul id="ul">
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block tail_script %}
+    <script>
+        $('.btn-get-data').on('click', function(){
+            $.ajax({
+                url: $('.content-data').data('url'),
+                type: 'GET',
+                dataType: 'json',
+                success: function(resp){
+                    $('.content-data').html(resp);
+                    console.log(resp)
+                },
+                error: function(resp){
+                    console.log('error searching');
+                }
+            });
+        });
+
+    </script>
+{% endblock %}

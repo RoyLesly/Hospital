@@ -1,0 +1,49 @@
+
+	<!-- [ navigation menu ] start -->
+	<nav class="pcoded-navbar menupos-fixed menu-light ">
+		<div class="navbar-wrapper  ">
+			<div class="navbar-content scroll-div " >
+				<ul class="nav pcoded-inner-navbar ">
+					<li class="nav-item pcoded-menu-caption">
+						<label><h4>{{ title }}</h4></label>
+					</li>
+					<li class="nav-item">
+					    <a href="/" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span>
+						</a>
+					</li>
+
+					<li class="nav-item pcoded-menu-caption">
+					    <h4>Forms</h4>
+					</li>
+					<li class="nav-item">
+					    <a href="{% url 'regis:regisCreate' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">New Patient</span></a>
+					</li>
+					<li class="nav-item">
+					    <a href="{% url 'regis:regisList' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">View Patient</span></a>
+					</li>
+					<li class="nav-item">
+					    <a href="/tbl_bootstrap.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-search"></i></span><span class="pcoded-mtext">Search Patient</span></a>
+					</li>
+					<li class="nav-item">
+					    <a href="/tbl_bootstrap.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-align-justify"></i></span><span class="pcoded-mtext">Other</span></a>
+					</li>
+				</ul>
+
+				<div class="card text-center">
+					<div class="card-block">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="feather icon-sunset f-40"></i>
+                        <br />
+						<p>Need more?</p>
+						<a target="_blank" rel="noopener noreferrer"
+						   href="#"
+                           class="btn btn-primary btn-sm text-white m-0">Gradient</a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</nav>
+    <!-- [ navigation menu ] end -->

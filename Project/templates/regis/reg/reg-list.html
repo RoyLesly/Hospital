@@ -1,0 +1,92 @@
+{% extends 'base/baseReg/baseAll.html'%}
+{% load static %}
+
+{% block sidebar %}
+    {% include 'includes/RegSidebar.html' %}
+{% endblock %}
+
+{% block navbar %}
+    {% include 'includes/RegNavigation.html' %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'Reg_list//util.css' %}">
+	<link rel="stylesheet" href="{% static 'Reg_list//main.css' %}">
+	<link rel="stylesheet" href="{% static 'Reg_list/font-awesome.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+	<div class="">
+		<center><h2>R Patient-View Page</h2></center>
+	</div>
+	<div class="">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Serial #</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Age</th>
+						<th>Sex</th>
+						<th>Phone</th>
+						<th>Address</th>
+						<th>Date Created</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for patient in Patients %}
+					<tr>
+						<td class="cell100 column1"><a href="{% url 'regis:patientDetail' patient.slug %}"><b><h5>{{ patient.sn }}</h5></b></a></td>
+						<td class="cell100 column2"><b><h5>{{ patient.first_name }}</h5></b></td>
+						<td class="cell100 column3"><b><h5>{{ patient.last_name }}</h5></b></td>
+						<td class="cell100 column7"><b><h5>{{ patient.age }}</h5></b></td>
+						<td class="cell100 column5"><b><h5>{{ patient.sex }}</h5></b></td>
+						<td class="cell100 column6"><b><h5>{{ patient.Phone }}</h5></b></td>
+						<td class="cell100 column4"><b><h5>{{ patient.address }}</h5></b></td>
+						<td class="cell100 column8"><b><h5>{{ patient.date_created }}</h5></b></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+    <div class="line"></div>
+
+	<div class="row">
+      <div class="col-12">
+        <span class="step-links">
+
+          {% if is_paginated %}
+
+            {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">&laquo; First</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Prev</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+              {% if page_obj.number == num %}
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+              {% elif num > page_obj.number|add:'-4' and num < page_obj.number|add:'4' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+              {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+
+          {% endif %}
+        </span>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block js_page %}
+	<script src="{% static '/Reg_list/list_patient.js' %}"></script>
+{% endblock %}

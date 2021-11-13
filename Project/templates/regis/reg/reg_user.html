@@ -1,0 +1,53 @@
+{% extends "base/base2.html "%}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head_script %}
+    <link href="{% static 'base2/css/sidebar.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div class="row content-section">
+      <div class="center col-md-3">
+          <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+          <div class="sidebar-heading border-bottom bg-light">R</div>
+          <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'reg_patient' %}">NEW PATIENT<span class="sr-only">(current)</span></a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">OLD PATIENT</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'reg_user' %}">NEW USER</a>
+          </div>
+        </div>
+      </div>  
+      <div class="center col-md-9">
+          <form method="POST">
+            {% csrf_token %}
+              <fieldset class="form-group">
+                  <legend class="border-bottom mb-4">Join Today</legend>
+
+                 {{ form|crispy }}
+
+              </fieldset>
+              <div class="for-group">
+                  <button class="btn btn-outline-info" type="submit">Create User</button>
+              </div>
+          </form>
+          <div class="border-top pt-3">
+              <small class="text-muted">ALREADY HAVE AN ACCOUNT? <a class="ml-2" href="#">LOG IN</a>
+              </small>
+          </div>
+      </div>
+      <div class="col-md-4">
+          {% for exam in exam %}
+          {{ exam.type }}
+          {% endfor %}
+      </div>
+    </div>
+    <br><br>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'base2/js/sidebar.js' %}"></script>
+{% endblock %}
