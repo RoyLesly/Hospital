@@ -50,7 +50,9 @@
           <li><a class="nav-link scrollto active" href="{% url 'root:welcome' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'regis:regHome' %}">Registration</a></li>
           <li><a class="nav-link scrollto" href="{% url 'regis:payHome' %}">Payment</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'authentication:logout' %}">Logout</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'authentication:logout' %}">Logout</a></li>
+          {% endif %}
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

@@ -7,6 +7,7 @@ Copyright (c) 2019 - present AppSeed.us
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, get_user_model
 from .forms import LoginForm, SignUpForm
+from django.contrib.auth.decorators import login_required
 
 
 def login_view(request):
@@ -19,7 +20,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                return redirect("authentication:profile")
             else:
                 msg = 'Invalid credentials'
         else:
@@ -39,11 +40,9 @@ def register_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
 
-            msg = 'User created - please <a href="/login">login</a>.'
+            msg = '<h3>Department created</h3> - <br>please <a href="/login">login</a>.'
             success = True
-
-            # return redirect("/login/")
-
+            # return redirect("profile/")
         else:
             msg = 'Form is not valid'
     else:
@@ -61,3 +60,8 @@ def logout_view(request):
             pass
 
     return render(request, "root/welcome.html", {"msg": msg})
+
+
+@login_required
+def profile_view(request):
+    return render(request, 'accounts/profile.html')

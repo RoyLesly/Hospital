@@ -50,7 +50,9 @@
           <li><a class="nav-link scrollto active" href="{% url 'root:welcome' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'radio:echoHome' %}">Ultrasound</a></li>
           <li><a class="nav-link scrollto" href="{% url 'radio:xrayHome' %}">X-Ray</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'authentication:logout' %}">Logout</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'authentication:logout' %}">Logout</a></li>
+          {% endif %}
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

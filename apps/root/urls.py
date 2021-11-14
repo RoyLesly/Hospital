@@ -6,7 +6,4 @@ app_name = 'root'
 
 urlpatterns = [
     path('', Welcome.as_view(), name='welcome'),
-    #path('account/', include('account.urls', namespace='account')),
-    #path('regis/', include('regis.urls', namespace='regis')),
-
 ]

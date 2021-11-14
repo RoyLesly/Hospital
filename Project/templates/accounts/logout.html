@@ -12,7 +12,6 @@
 					<div class="col-md-12">
 						<div class="card-body">
 
-							<img src="/static/assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
 							<h4 class="mb-3 f-w-400">
 								LOGGED OUT
 							</h4>
@@ -20,19 +19,13 @@
 								{% if msg %}
 									{{ msg | safe }}
 								{% else %}
-									Add your credentials
+
 								{% endif %} 
 							</span>
 							<!-- dummy spacer -->
 							<p> <br /> </p>
 
-							<p class="mb-0 text-muted">Login Again <a href="{% url 'authentication:login' %}" class="f-w-400">Login</a></p>
-							<p class="mb-2 text-muted">
-								<br />
-								&copy; <a target="_blank" rel="noopener" href="https://bit.ly/37fF9RT" class="f-w-400">CodedThemes</a>
-								- <a target="_blank" rel="noopener" 
-								     href="https://appseed.us/admin-dashboards/django-gradient-able" class="f-w-400">Django Gradient</a>
-							</p>
+							<p class="mb-0 text-muted"><h5></h5><a href="{% url 'authentication:login' %}" class="f-w-400"><h4>Login Again</h4></a></p>
 						</div>
 					</div>
 				</div>
