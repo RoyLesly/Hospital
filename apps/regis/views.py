@@ -100,7 +100,7 @@ class RegisViewPatient(LoginRequiredMixin, ListView):  # May as well use Templat
         return Patient.objects.all()[:15]'''
 
 
-class RegisCreatePatientView(CreateView):
+class RegisCreatePatientView(LoginRequiredMixin, CreateView):
     model = Patient
     model2 = Purpose
     form_class2 = RegPatientForm  # or fields =['name', ...]
@@ -125,7 +125,7 @@ def patient_detail(request, slug):
     return render(request, 'regis/reg/reg-patientDetail.html', context)
 
 
-class RegisSearchPatientView(View):
+class RegisSearchPatientView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
@@ -177,7 +177,7 @@ def patSearch(request):
             return JsonResponse(data, safe=False)
 
 
-class DateCreatedView(ListView):
+class DateCreatedView(LoginRequiredMixin, ListView):
     context_object_name = 'Patients'
     model = Patient
     template_name = "regis/reg-create.html"

@@ -20,7 +20,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("authentication:profile")
+                return redirect("/")
             else:
                 msg = 'Invalid credentials'
         else:
@@ -42,7 +42,7 @@ def register_user(request):
 
             msg = '<h3>Department created</h3> - <br>please <a href="/login">login</a>.'
             success = True
-            # return redirect("profile/")
+            # return redirect("login/")
         else:
             msg = 'Form is not valid'
     else:
@@ -51,15 +51,14 @@ def register_user(request):
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
 
 
-def logout_view(request):
+'''def logout_view(request):
     msg = None
     if request.method == "GET":
         if get_user_model():
             return render(request, "accounts/logout.html", {"msg": msg})
         else:
             pass
-
-    return render(request, "root/welcome.html", {"msg": msg})
+    return render(request, "root/welcome.html", {"msg": msg})'''
 
 
 @login_required
