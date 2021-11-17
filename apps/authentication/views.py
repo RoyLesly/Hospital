@@ -7,7 +7,6 @@ Copyright (c) 2019 - present AppSeed.us
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, get_user_model
 from .forms import LoginForm, SignUpForm
-from django.contrib.auth.decorators import login_required
 
 
 def login_view(request):
@@ -60,7 +59,3 @@ def register_user(request):
             pass
     return render(request, "root/welcome.html", {"msg": msg})'''
 
-
-@login_required
-def profile_view(request):
-    return render(request, 'accounts/profile.html')

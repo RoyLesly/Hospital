@@ -18,6 +18,8 @@
 								<br><br>
 							{% if user.username == 'zane' %}
 									<p class="mb-0 text-muted"><a href='{% url "root:welcome" %}' class="f-w-400"><h6>Main Page</h6></a></p>
+							{% elif user.username == 'Finance' %}
+									<p class="mb-0 text-muted"><a href='{% url "finance:welcome" %}' class="f-w-400"><h4>Main Page</h4></a></p>
 							{% elif user.username == 'Admin' %}
 									<p class="mb-0 text-muted"><a href='{% url "root:welcome" %}' class="f-w-400"><h4>Main Page</h4></a></p>
 							{% elif user.username == 'Registration' %}

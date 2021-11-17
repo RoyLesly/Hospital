@@ -9,7 +9,7 @@ from apps.account.models import Account
 from django.db.models.signals import post_save
 
 
-# ==================== USER FOR RADIO ========================================================
+# ==================== USER FOR RADIO ================================================================
 class PharmUser(models.Model):
     username = models.OneToOneField(Account, unique=True, on_delete=models.CASCADE)
 
@@ -31,11 +31,11 @@ def create_User(sender, **kwargs):
 
 post_save.connect(create_User, sender=Account)
 
+# ____________________________________________________________________________________________________
 
 # =============  Increment PH number, PH ms, PH ds  (pd = pharmacy dispensary) =======================
 def auto_increment_pdn():
     now = datetime.date.today()
-    # all_patients = Patient.objects.using('radio_db').all().filter(date_created__year=now.year,
     all_patients = PPatient.objects.all().filter(date_created__year=now.year,
                                                  date_created__month=now.month, ).order_by('un')
     if all_patients.exists():
@@ -52,7 +52,6 @@ def auto_increment_pdn():
 
 def auto_increment_pdms():
     now = datetime.date.today()
-    # now.month, now.year
     # all_purpose = UPatient.objects.using('radio_db').all().filter(date_created__year=now.year,
     all_purpose = UExam.objects.all().filter(date_created__year=now.year,
                                              date_created__month=now.month, ).order_by("date_created")
@@ -239,7 +238,7 @@ XR_EXAM_CHOICES = (('CXR', 'CXR'),
 RAD_FEES_CHOICES = (('16000', '16000'), ('15000', '15000'), ('14000', '14000'), ('10000', '10000'), ('8000', '8000'),
                     ('7000', '7000'), ('6000', '6000'), ('5000', '5000'), ('3000', '3000'), ('9000', '9000'), ('5500', '5500'),
                     ('9500', '9500'), ('8500', '8500'), ('7500', '7500'), ('6500', '6500'))
-DEPTS = (('Ultrasound', 'US'), ('X-ray', 'XR'))
+DEPTS = (('Store', 'Store'), ('Dispensary', 'Dispensary'))
 
 
 class PharmDept(models.Model):
@@ -264,10 +263,10 @@ class PharmStaff(CommonStaff):
         return str(self.first_name.upper())
 
 
-'''class PPatient(models.Model):
+class PPatient(models.Model):
     patient = models.OneToOneField(Patient, default='none',
                                    on_delete=models.CASCADE)
-    un = models.CharField(max_length=20, verbose_name='PH-Number', primary_key=True,
+    un = models.CharField(max_length=20, verbose_name='US-Number', primary_key=True,
                           default=auto_increment_pdn, editable=False, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -281,38 +280,3 @@ class PharmStaff(CommonStaff):
 
     def __str__(self):
         return str(self.patient.first_name.upper())
-
-
-class P_drugs(Exam):
-    p_drug = models.CharField(max_length=30, null=False)
-    ys = models.CharField(max_length=20, verbose_name='Y-Serial', primary_key=True,
-                          default=auto_increment_ys, editable=False)
-    patient = models.ForeignKey(PPatient, on_delete=models.CASCADE)
-    dept = models.ForeignKey(RadDept, default=2, on_delete=models.CASCADE, editable=False)
-    ms = models.CharField(max_length=20, verbose_name='M-Serial',
-                          default=auto_increment_xms, editable=False)
-    ds = models.CharField(max_length=20, verbose_name='D-Serial',
-                          default=auto_increment_xds, editable=False)
-    fees = models.CharField(max_length=6, choices=RAD_FEES_CHOICES)
-    count = models.CharField(max_length=7, editable=False)
-
-    class Meta:
-        pass
-
-    def __str__(self):
-        return str(self.x_exam.upper()) + str(self.patient)
-
-    def auto_increment_ex_count(self, *args, **kwargs):
-        this = XExam.objects.all().filter(patient=self.patient)  # query this patient
-        if this.exists():
-            order_exams = this.order_by('count').last().count
-            new = int(order_exams) + 1
-            self.count = new
-        else:
-            self.count = 1
-
-    def save(self, *args, **kwargs):
-        self.auto_increment_ex_count()
-        super(XExam, self).save(*args, **kwargs)
-
-'''

@@ -22,14 +22,14 @@ class WardUser(models.Model):
 
 def create_User(sender, **kwargs):
     if kwargs['created']:
-        created_obj = Account.objects.all().order_by('date_joined').last()
-        name = created_obj.username
-        if name == 'Ward' or name == 'zane' or name == 'admin':        # 'Radiology', 'PHAR', 'LABO', 'WARD', 'ADMIN', 'zane', 'OTHER'
+        created_obj = Account.objects.all().order_by('date_joined').last().username
+        if created_obj == 'Ward' or created_obj == 'zane' or created_obj == 'admin':
             User = WardUser.objects.create(username=created_obj)
 
 
 post_save.connect(create_User, sender=Account)
 
+# ______________________________________________________________________________________________________
 
 # =============  Increment PH number, PH ms, PH ds  (pd = pharmacy dispensary) =======================
 def auto_increment_pdn():

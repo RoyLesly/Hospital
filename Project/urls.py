@@ -19,8 +19,10 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),          # Django admin route
     path("", include("apps.authentication.urls")), # Auth routes - login / register
+    path("", include("apps.root.urls")),  # UI Kits Html files
     path("dash/", include("apps.dash.urls")),
-    path("", include("apps.root.urls")),             # UI Kits Html files
+    path("finance/", include("apps.finance.urls")),
+    path("accounts/", include("apps.account.urls")),
     path("regis/", include("apps.regis.urls")),
     path("radio/", include("apps.radio.urls")),
     path("pharm/", include("apps.pharm.urls")),

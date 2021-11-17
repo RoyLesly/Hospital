@@ -13,7 +13,6 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import FormView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-
 # Create your views here.
 '''
 class RadioWelcomeView(LoginRequiredMixin, View):
@@ -43,14 +42,9 @@ class RadioWelcomeView(LoginRequiredMixin, View):
 
 
 def regUserList(request):
-    print("test")
     allUser = RadioUser.objects.all().order_by('username_id')
-    first = allUser[0].username
-    second = allUser[1].username
-    last = allUser.last().username
-    userList = (first, second, last)
     user = request.user
-    if user in userList:
+    if user in allUser:
         return True
     else:
         return False

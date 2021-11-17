@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 
 from apps.root.models import CommonStaff
 from apps.regis.models import Patient

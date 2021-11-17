@@ -6,7 +6,5 @@ admin.site.register([UPatient,
                      XPatient,
                      UExam,
                      XExam,
-                    UResult,
-                     RadDept,
-                     RadStaff,
-                     RadioUser])
+                    UResult,])
+# admin.site.register([RadDept, RadStaff, RadioUser])

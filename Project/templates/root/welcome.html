@@ -17,6 +17,8 @@
             <li><a href="tsd/">Technical Service</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'authentication:logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'authentication:login' %}">Login</a></li>
             {% endif %}
         </ul>
       </li>

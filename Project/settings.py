@@ -30,12 +30,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'apps.finance',
     'apps.account',
     'apps.dash',  # Enable the inner app
     'apps.root',
     'apps.regis',
     'apps.radio',
     'apps.pharm',
+    'apps.labo',
     'apps.ward',
 ]
 

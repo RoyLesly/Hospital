@@ -43,6 +43,7 @@ DEPT_CHOICES = (('Registration', 'Registration'),
                 ('Orthopedic', 'Orthopedic'),
                 ('admin', "Admin"),
                 ('zane', "Zane"),
+                ('Finance', "Finance"),
                 ('Other', 'Other'))
 
 
